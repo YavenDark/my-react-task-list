@@ -1,16 +1,19 @@
 [{
     "id":1,
-    "tarea": "Terminar mi CV"
+    "tarea": "Terminar mi CV",
+    "completado": false
     
 },
 {
     "id":2,
-    "tarea": "Actualizar mi Git"
+    "tarea": "Actualizar mi Git",
+    "completado": false
    
 
 },
 {
     "id":3,
-    "tarea": "Crear un Todo App"
+    "tarea": "Crear un Todo App",
+    "completado": false
    
 }]
