@@ -1,5 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "./Components/Header";
 import data from "./data.json";
 
@@ -8,41 +8,58 @@ function App() {
 
   const onBorrarTarea = (id) => {
     console.log(id);
+    let tareasGuardadas = [...tareas];
     let pregunta = prompt("deseas borrar la tarea? si/no");
     if (pregunta == "si") {
-      setTareas([...tareas].filter((tarea) => tarea.id !== id));
+      tareasGuardadas = [...tareas].filter((tarea) => tarea.id !== id);
     } else if (pregunta == "no") {
       alert("buena eleccion");
     } else {
       alert("ingresa por favor un valor valido");
     }
+    setTareas(tareasGuardadas);
+    localStorage.setItem("tareas", JSON.stringify(tareasGuardadas));
   };
 
   const agregarTarea = (nuevaTarea) => {
     console.log("se agrego ", nuevaTarea);
+    let tareasGuardadas = [...tareas];
     let newTarea = {
       id: tareas.length + 1,
       tarea: nuevaTarea,
       completado: false,
     };
-    setTareas([...tareas, newTarea]);
+    tareasGuardadas = [...tareas, newTarea];
+    setTareas(tareasGuardadas);
+    localStorage.setItem("tareas", JSON.stringify(tareasGuardadas));
   };
 
   const completarTarea = (tarea) => {
-    console.log(tarea);
-    setTareas(
-      tareas.map((item) => {
-        if (item.id === tarea.id) {
-          return { ...item, completado: !item.completado };
-        }
-        return item;
-      })
-    );
+    let tareasGuardadas = [...tareas];
+    tareasGuardadas = tareasGuardadas.map((item) => {
+      if (item.id === tarea.id) {
+        return { ...item, completado: !item.completado };
+      }
+      return item;
+    });
+    setTareas(tareasGuardadas);
+    localStorage.getItem("tareas", JSON.stringify(tareasGuardadas));
   };
 
   const onBorrarTareas = () => {
-    setTareas([]);
+    let tareasGuardadas = [...tareas];
+    tareasGuardadas = [];
+    console.log(tareasGuardadas);
+    setTareas(tareasGuardadas);
+    localStorage.getItem("tareas", JSON.stringify(tareasGuardadas));
   };
+
+  useEffect(() => {
+    const localStorageData = localStorage.getItem("tareas");
+    const tareaDataJson = JSON.parse(localStorageData);
+    setTareas(tareaDataJson);
+  }, []);
+
   return (
     <ChakraProvider>
       <div className="App">

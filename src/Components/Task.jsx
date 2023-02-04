@@ -21,13 +21,14 @@ export const Task = (props) => {
           border="1px"
           backgroundColor={"gray.100"}
           borderRadius={10}
+          style={{ textDecoration: tarea.completado ? "line-through" : null }}
         >
           {tarea.completado ? <>{tarea.tarea}</> : <>{tarea.tarea}</>}
 
           <Button
             as={CheckIcon}
             colorScheme="green"
-            onClick={() => {
+            onClick={(e) => {
               completarTarea(tarea);
             }}
           ></Button>
