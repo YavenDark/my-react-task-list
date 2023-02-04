@@ -17,6 +17,7 @@ export const Header = (props) => {
     agregarTarea,
     completarTarea,
     onBorrarTareas,
+    onEditarTarea,
   } = props;
   const [nuevaTarea, setNuevaTarea] = useState("");
   const onHandleSubmit = (e) => {
@@ -60,6 +61,7 @@ export const Header = (props) => {
           onBorrarTarea={onBorrarTarea}
           completarTarea={completarTarea}
           onBorrarTareas={onBorrarTareas}
+          onEditarTarea={onEditarTarea}
         />
       </form>
     </Container>

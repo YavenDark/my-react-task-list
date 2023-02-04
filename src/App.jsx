@@ -54,6 +54,23 @@ function App() {
     localStorage.getItem("tareas", JSON.stringify(tareasGuardadas));
   };
 
+  const onEditarTarea = (id) => {
+    let tareasGuardadas = [...tareas];
+    let tareaEdit = tareasGuardadas.find((tarea) => tarea.id === id);
+    let newTarea = prompt(
+      "Ingrese la nueva descripción de la tarea",
+      tareaEdit.tarea
+    );
+    tareasGuardadas = tareasGuardadas.map((item) => {
+      if (item.id === id) {
+        return { ...item, tarea: newTarea };
+      }
+      return item;
+    });
+    setTareas(tareasGuardadas);
+    localStorage.setItem("tareas", JSON.stringify(tareasGuardadas));
+  };
+
   useEffect(() => {
     const localStorageData = localStorage.getItem("tareas");
     const tareaDataJson = JSON.parse(localStorageData);
@@ -69,6 +86,7 @@ function App() {
           agregarTarea={agregarTarea}
           completarTarea={completarTarea}
           onBorrarTareas={onBorrarTareas}
+          onEditarTarea={onEditarTarea}
         />
       </div>
     </ChakraProvider>

@@ -11,7 +11,7 @@ import { DeleteIcon, EditIcon, CheckIcon } from "@chakra-ui/icons";
 import React from "react";
 
 export const Task = (props) => {
-  const { tarea, onBorrarTarea, completarTarea } = props;
+  const { tarea, onBorrarTarea, completarTarea, onEditarTarea } = props;
 
   return (
     <div>
@@ -28,11 +28,15 @@ export const Task = (props) => {
           <Button
             as={CheckIcon}
             colorScheme="green"
-            onClick={(e) => {
+            onClick={() => {
               completarTarea(tarea);
             }}
           ></Button>
-          <Button as={EditIcon} colorScheme="yellow">
+          <Button
+            onClick={() => onEditarTarea(tarea.id)}
+            as={EditIcon}
+            colorScheme="yellow"
+          >
             Actualizar
           </Button>
           <Button
