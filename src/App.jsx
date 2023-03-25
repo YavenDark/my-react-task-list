@@ -35,6 +35,7 @@ function App() {
         if (item.id === tarea.id) {
           return { ...item, completado: !item.completado };
         }
+        
         return item;
       })
     );
